@@ -25,7 +25,7 @@
     <!--Use android:dashWidth="2dp" and android:dashGap="2dp"
     to add dashes to your stroke-->
     <stroke
-        android:dashGap="2dp"
+        android:dashGap="1dp"
         android:dashWidth="1dp"
         android:width="2dp"
         android:color="@color/colorAccent" />

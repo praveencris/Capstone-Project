@@ -3,4 +3,11 @@
     <string name="action_share">Share</string>
     <string name="action_summary">Summary</string>
     <string name="number_of_orders_">Number of Orders : %d</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="add_item">ADD ITEM</string>
+    <string name="enter_item_name">Enter Item Name</string>
+    <string name="enter_estimated_price">Enter Estimated Price</string>
+    <string name="enter_max_items_allowed">Enter Max Items Allowed</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
 </resources>

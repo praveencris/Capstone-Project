@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            app:cardCornerRadius="8dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    app:layout_constraintTop_toBottomOf="@id/til_user_name" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/til_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:padding="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/auto_complete_tv_user_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_regular"
+                            android:hint="@string/enter_name"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+                app:srcCompat="@drawable/ic_add_white"
+                tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:id="@+id/tv_label_add_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:text="TAKE ORDER"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="80dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/colorLabel" />
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="8dp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/number_of_orders_"
+                android:textColor="@color/colorLabel" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -7,4 +7,16 @@
     <color name="colorSecondaryText">#95989A</color>
     <color name="colorLabel">@android:color/white</color>
 
+
+
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="gray">#F2F2F2</color>
+    <color name="lightgray">#C9C9C9</color>
+    <color name="green">#2b9f2e</color>
+    <color name="darkGray">#333333</color>
+    <color name="red">#F44336</color>
+    <color name="secondaryText">#b7b7b7</color>
+    <color name="transparent_eighty">#CCFFFFFF</color>
+    <color name="transparent_ninety">#E6FFFFFF</color>
 </resources>
