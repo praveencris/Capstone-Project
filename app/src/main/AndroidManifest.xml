@@ -13,7 +13,7 @@
         <activity
             android:name=".takeOrder.TakeOrderActivity"
             android:theme="@style/ActivityWithDefaultDialog" />
-        <activity android:name=".orderDetails.OrderDetailsActivity">
+        <activity android:name=".orderDetail.OrderDetailsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
