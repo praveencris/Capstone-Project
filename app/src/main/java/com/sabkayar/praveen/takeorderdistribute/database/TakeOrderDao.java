@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
@@ -48,6 +49,8 @@ public interface TakeOrderDao {
     @Delete
     void deleteUserName(UserName userName);
 
+    @Query("UPDATE Item set itemName=:itemName and itemPrice=:itemPrice and maxItemAllowed=:maxItemAllowed where itemId=:itemId")
+    void updateItem(int itemId,String itemName,int itemPrice,int maxItemAllowed);
 
     @Query("SELECT * FROM UserName ORDER BY userName")
     LiveData<List<UserName>> getUserNames();
@@ -57,7 +60,6 @@ public interface TakeOrderDao {
 
     @Query("SELECT * FROM Item ORDER BY itemName")
     LiveData<List<Item>> getItems();
-
 
     @Query("SELECT * FROM Item where itemId=:itemId")
     Item getItem(int itemId);

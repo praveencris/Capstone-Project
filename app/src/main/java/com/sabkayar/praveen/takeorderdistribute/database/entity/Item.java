@@ -18,21 +18,43 @@ public class Item {
     @ColumnInfo(defaultValue = "0")
     private int itemPrice;
 
-    @ColumnInfo(defaultValue = "4")
-    private int maxItemAllowed;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
-    @Ignore
-    public Item(@NonNull String itemName, int itemPrice, int maxItemAllowed) {
+    public void setItemName(@NonNull String itemName) {
         this.itemName = itemName;
+    }
+
+    public void setItemPrice(int itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public void setMaxItemAllowed(int maxItemAllowed) {
         this.maxItemAllowed = maxItemAllowed;
     }
 
-    public Item(int itemId, @NonNull String itemName, int itemPrice, int maxItemAllowed) {
+    @ColumnInfo(defaultValue = "4")
+    private int maxItemAllowed;
+
+    @ColumnInfo(defaultValue = "0")
+    private int isChecked;
+
+
+    @Ignore
+    public Item(@NonNull String itemName, int itemPrice, int maxItemAllowed, int isChecked) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.maxItemAllowed = maxItemAllowed;
+        this.isChecked = isChecked;
+    }
+
+    public Item(int itemId, @NonNull String itemName, int itemPrice, int maxItemAllowed, int isChecked) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.maxItemAllowed = maxItemAllowed;
+        this.isChecked = isChecked;
     }
 
     public int getItemId() {
@@ -50,5 +72,14 @@ public class Item {
 
     public int getMaxItemAllowed() {
         return maxItemAllowed;
+    }
+
+
+    public int getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
     }
 }

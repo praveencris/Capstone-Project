@@ -3,23 +3,28 @@ package com.sabkayar.praveen.takeorderdistribute.takeOrder.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sabkayar.praveen.takeorderdistribute.R;
+import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
 import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
-import com.sabkayar.praveen.takeorderdistribute.takeOrder.model.ItemInfo;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemInfoViewHolder> {
 
-    private ArrayList<ItemInfo> mItemInfoArrayList = new ArrayList<>();
+    private ArrayList<Item> mItemArrayList = new ArrayList<>();
 
     public interface OnEditClickListener {
-        void onEditClick(ItemInfo itemInfo);
+        void onEditClick(Item item);
     }
 
     private OnEditClickListener mOnEditClickListener;
@@ -28,8 +33,8 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         mOnEditClickListener = listener;
     }
 
-    public void setItemInfoArrayList(ArrayList<ItemInfo> itemInfoArrayList) {
-        mItemInfoArrayList = itemInfoArrayList;
+    public void setItemInfoArrayList(ArrayList<Item> itemInfoArrayList) {
+        mItemArrayList = itemInfoArrayList;
         notifyDataSetChanged();
     }
 
@@ -42,13 +47,13 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
 
     @Override
     public void onBindViewHolder(@NonNull ItemInfoViewHolder holder, int position) {
-        holder.bindView(mItemInfoArrayList.get(position));
+        holder.bindView(mItemArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (mItemInfoArrayList != null)
-            return mItemInfoArrayList.size();
+        if (mItemArrayList != null)
+            return mItemArrayList.size();
         return 0;
     }
 
@@ -61,14 +66,23 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             mBinding.imvEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnEditClickListener.onEditClick(mItemInfoArrayList.get(getAdapterPosition()));
+                    mOnEditClickListener.onEditClick(mItemArrayList.get(getAdapterPosition()));
                 }
             });
         }
 
-        void bindView(ItemInfo itemInfo) {
-            mBinding.tvItem.setText(itemInfo.getItemName());
-            mBinding.checkBox.setChecked(itemInfo.isChecked());
+        void bindView(Item item) {
+            mBinding.tvItem.setText(item.getItemName());
+            mBinding.checkBox.setChecked(item.getIsChecked() != 0);
+            mBinding.spinnerCount.setAdapter(getSpinnerAdapter(item));
+        }
+
+        private SpinnerAdapter getSpinnerAdapter(Item item) {
+            List<Integer> countList=new ArrayList<>();
+            for(int i=0;i<item.getMaxItemAllowed();i++){
+                countList.add(i,i+1);
+            }
+            return new ArrayAdapter<>(mBinding.getRoot().getContext(), android.R.layout.simple_spinner_dropdown_item, countList);
         }
     }
 }

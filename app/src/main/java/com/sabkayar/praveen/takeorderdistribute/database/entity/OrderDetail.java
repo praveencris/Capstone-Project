@@ -3,6 +3,7 @@ package com.sabkayar.praveen.takeorderdistribute.database.entity;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -10,7 +11,9 @@ import java.util.Date;
 @Entity(foreignKeys = @ForeignKey(entity = Item.class,
         parentColumns = "itemId",
         childColumns = "itemId",
-        onDelete = ForeignKey.RESTRICT, onUpdate = ForeignKey.CASCADE))
+        onDelete = ForeignKey.RESTRICT, onUpdate = ForeignKey.CASCADE),
+        indices = {@Index(value = {"itemId"},
+                unique = true)})
 public class OrderDetail {
 
     @PrimaryKey(autoGenerate = true)

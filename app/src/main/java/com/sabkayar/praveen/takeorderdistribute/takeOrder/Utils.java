@@ -1,18 +1,15 @@
 package com.sabkayar.praveen.takeorderdistribute.takeOrder;
 
-import com.sabkayar.praveen.takeorderdistribute.takeOrder.model.ItemInfo;
+import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
+
 
 import java.util.ArrayList;
 
 public final class Utils {
-    public static ArrayList<ItemInfo> getDummyList() {
-        ArrayList<ItemInfo> arrayList = new ArrayList<>();
+    public static ArrayList<Item> getDummyList() {
+        ArrayList<Item> arrayList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            ItemInfo itemInfo = new ItemInfo();
-            itemInfo.setChecked(false);
-            itemInfo.setItemName("Item " + (i + 1));
-            itemInfo.setItemPrice("");
-            itemInfo.setMaxItemsAllowed(4);
+            Item itemInfo = new Item("Item " + (i + 1),0,4,0);
             arrayList.add(itemInfo);
         }
         return arrayList;

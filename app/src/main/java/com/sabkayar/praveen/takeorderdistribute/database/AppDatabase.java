@@ -12,7 +12,7 @@ import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.UserName;
 
-@Database(entities = {Item.class, OrderDetail.class, UserName.class}, version = 1, exportSchema = false)
+@Database(entities = {Item.class, OrderDetail.class, UserName.class}, version = 4, exportSchema = true)
 @TypeConverters(value = {DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TakeOrderDao takeOrderDao();
@@ -25,14 +25,14 @@ public abstract class AppDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor
             = Executors.newFixedThreadPool(NUMBER_OF_THREADS);*/
 
-    static AppDatabase getInstance(final Context context) {
+    public static AppDatabase getInstance(final Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
                 if (sInstance == null) {
                     Log.d(LOG_TAG, "New reference to database created");
                     sInstance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class,
-                            DATABASE_NAME).build();
+                            DATABASE_NAME).fallbackToDestructiveMigration().build();
                 }
             }
         }
