@@ -1,75 +1,69 @@
 package com.sabkayar.praveen.takeorderdistribute.database.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
 
-@Entity(foreignKeys = @ForeignKey(entity = Item.class,
-        parentColumns = "itemId",
-        childColumns = "itemId",
-        onDelete = ForeignKey.RESTRICT, onUpdate = ForeignKey.CASCADE),
-        indices = {@Index(value = {"itemId"},
-                unique = true)})
-public class OrderDetail {
+@Entity
+public class OrderDetail implements Parcelable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int orderId;
 
-    private int itemId;
-
-    @NonNull
-    private String itemName;
-
-    private int userId;
-
+    @PrimaryKey
     @NonNull
     private String userName;
 
-    private int itemCount;
+    private String itemDesc;
 
-    private Date orderDate;
-
-    public OrderDetail(int orderId,int itemId, @NonNull String itemName, int userId, @NonNull String userName, int itemCount,Date orderDate) {
-        this.orderId = orderId;
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.userId = userId;
-        this.userName = userName;
-        this.itemCount = itemCount;
-        this.orderDate = orderDate;
+    protected OrderDetail(Parcel in) {
+        userName = in.readString();
+        itemDesc = in.readString();
     }
 
-    public int getOrderId() {
-        return orderId;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userName);
+        dest.writeString(itemDesc);
     }
 
-    public int getItemId() {
-        return itemId;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    @NonNull
-    public String getItemName() {
-        return itemName;
-    }
+    public static final Creator<OrderDetail> CREATOR = new Creator<OrderDetail>() {
+        @Override
+        public OrderDetail createFromParcel(Parcel in) {
+            return new OrderDetail(in);
+        }
 
-    public int getUserId() {
-        return userId;
-    }
+        @Override
+        public OrderDetail[] newArray(int size) {
+            return new OrderDetail[size];
+        }
+    };
 
-    @NonNull
     public String getUserName() {
         return userName;
     }
 
-    public int getItemCount() {
-        return itemCount;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getItemDesc() {
+        return itemDesc;
+    }
+
+    public void setItemDesc(String itemDesc) {
+        this.itemDesc = itemDesc;
+    }
+
+    public OrderDetail(String userName, String itemDesc) {
+        this.userName = userName;
+        this.itemDesc = itemDesc;
     }
 }

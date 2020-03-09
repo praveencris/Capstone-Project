@@ -22,13 +22,13 @@ import java.util.List;
 @Dao
 public interface TakeOrderDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Item item);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(OrderDetail orderDetail);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(UserName userName);
 
     @Query("DELETE from OrderDetail")
@@ -49,8 +49,12 @@ public interface TakeOrderDao {
     @Delete
     void deleteUserName(UserName userName);
 
-    @Query("UPDATE Item set itemName=:itemName and itemPrice=:itemPrice and maxItemAllowed=:maxItemAllowed where itemId=:itemId")
-    void updateItem(int itemId,String itemName,int itemPrice,int maxItemAllowed);
+
+   /* @Query("UPDATE Item set itemName=:itemName,itemPrice=:itemPrice,maxItemAllowed=:maxItemAllowed where itemId=:itemId")
+    void updateItem(int itemId,String itemName,int itemPrice,int maxItemAllowed);*/
+
+   @Update(onConflict = OnConflictStrategy.IGNORE)
+   void updateItem(Item item);
 
     @Query("SELECT * FROM UserName ORDER BY userName")
     LiveData<List<UserName>> getUserNames();
@@ -58,13 +62,17 @@ public interface TakeOrderDao {
     @Query("SELECT * FROM OrderDetail ORDER BY userName")
     LiveData<List<OrderDetail>> getOrderDetails();
 
-    @Query("SELECT * FROM Item ORDER BY itemName")
+    @Query("SELECT * FROM Item ORDER BY itemId")
     LiveData<List<Item>> getItems();
 
     @Query("SELECT * FROM Item where itemId=:itemId")
     Item getItem(int itemId);
 
-    @Query("SELECT * FROM OrderDetail where orderId=:orderId")
-    OrderDetail getOrderDetail(int orderId);
+    @Query("SELECT * FROM OrderDetail")
+    OrderDetail getOrderDetail();
+
+
+    @Query("SELECT * FROM UserName ORDER BY userName")
+    LiveData<List<UserName>> getAllUsers();
 
 }

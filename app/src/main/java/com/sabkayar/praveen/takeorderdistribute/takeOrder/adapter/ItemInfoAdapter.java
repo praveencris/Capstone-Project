@@ -3,8 +3,8 @@ package com.sabkayar.praveen.takeorderdistribute.takeOrder.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sabkayar.praveen.takeorderdistribute.R;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
+import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,16 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
 
     private ArrayList<Item> mItemArrayList = new ArrayList<>();
 
-    public interface OnEditClickListener {
+    public interface OnListItemListener {
         void onEditClick(Item item);
+
+        void onCheckBoxChecked(OrderDetail orderDetail,boolean isAdd);
     }
 
-    private OnEditClickListener mOnEditClickListener;
+    private OnListItemListener mListener;
 
-    public ItemInfoAdapter(OnEditClickListener listener) {
-        mOnEditClickListener = listener;
+    public ItemInfoAdapter(OnListItemListener listener) {
+        mListener = listener;
     }
 
     public void setItemInfoArrayList(ArrayList<Item> itemInfoArrayList) {
@@ -66,7 +68,19 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             mBinding.imvEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnEditClickListener.onEditClick(mItemArrayList.get(getAdapterPosition()));
+                    mListener.onEditClick(mItemArrayList.get(getAdapterPosition()));
+                }
+            });
+            mBinding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    String itemName=mItemArrayList.get(getAdapterPosition()).getItemName();
+                    String itemCount=mBinding.spinnerCount.getSelectedItem().toString();
+                    OrderDetail orderDetail=new OrderDetail("",itemName+"-"+itemCount);
+                    if (isChecked)
+                        mListener.onCheckBoxChecked(orderDetail, true);
+                    else
+                        mListener.onCheckBoxChecked(orderDetail, false);
                 }
             });
         }
@@ -78,9 +92,9 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         }
 
         private SpinnerAdapter getSpinnerAdapter(Item item) {
-            List<Integer> countList=new ArrayList<>();
-            for(int i=0;i<item.getMaxItemAllowed();i++){
-                countList.add(i,i+1);
+            List<Integer> countList = new ArrayList<>();
+            for (int i = 0; i < item.getMaxItemAllowed(); i++) {
+                countList.add(i, i + 1);
             }
             return new ArrayAdapter<>(mBinding.getRoot().getContext(), android.R.layout.simple_spinner_dropdown_item, countList);
         }

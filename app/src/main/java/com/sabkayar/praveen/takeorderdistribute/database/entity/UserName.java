@@ -10,7 +10,6 @@ import androidx.room.PrimaryKey;
 public class UserName {
     @PrimaryKey(autoGenerate = true)
     private int userId;
-
     @NonNull
     private String userName;
 

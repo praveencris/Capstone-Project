@@ -12,7 +12,7 @@ import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.UserName;
 
-@Database(entities = {Item.class, OrderDetail.class, UserName.class}, version = 4, exportSchema = true)
+@Database(entities = {Item.class, OrderDetail.class, UserName.class}, version = 9, exportSchema = true)
 @TypeConverters(value = {DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TakeOrderDao takeOrderDao();

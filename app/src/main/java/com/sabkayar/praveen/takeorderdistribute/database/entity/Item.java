@@ -1,13 +1,21 @@
 package com.sabkayar.praveen.takeorderdistribute.database.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class Item {
+@OnConflictStrategy()
+@Entity(indices = {@Index(value = {"itemName"},
+        unique = true)})
+public class Item implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int itemId;
@@ -17,6 +25,26 @@ public class Item {
 
     @ColumnInfo(defaultValue = "0")
     private int itemPrice;
+
+    protected Item(Parcel in) {
+        itemId = in.readInt();
+        itemName = in.readString();
+        itemPrice = in.readInt();
+        maxItemAllowed = in.readInt();
+        isChecked = in.readInt();
+    }
+
+    public static final Creator<Item> CREATOR = new Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
@@ -81,5 +109,19 @@ public class Item {
 
     public void setIsChecked(int isChecked) {
         this.isChecked = isChecked;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(itemId);
+        dest.writeString(itemName);
+        dest.writeInt(itemPrice);
+        dest.writeInt(maxItemAllowed);
+        dest.writeInt(isChecked);
     }
 }
