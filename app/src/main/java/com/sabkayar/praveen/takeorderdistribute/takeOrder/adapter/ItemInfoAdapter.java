@@ -12,8 +12,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sabkayar.praveen.takeorderdistribute.R;
-import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
-import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
+import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item;
+import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
 
 import java.util.ArrayList;
@@ -21,12 +21,14 @@ import java.util.List;
 
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemInfoViewHolder> {
 
-    private ArrayList<Item> mItemArrayList = new ArrayList<>();
+    private List<Item> mItemArrayList = new ArrayList<>();
 
     public interface OnListItemListener {
         void onEditClick(Item item);
 
         void onCheckBoxChecked(OrderDetail orderDetail,boolean isAdd);
+
+        void onItemLongPress(Item item);
     }
 
     private OnListItemListener mListener;
@@ -35,7 +37,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         mListener = listener;
     }
 
-    public void setItemInfoArrayList(ArrayList<Item> itemInfoArrayList) {
+    public void setItemInfoArrayList(List<Item> itemInfoArrayList) {
         mItemArrayList = itemInfoArrayList;
         notifyDataSetChanged();
     }
@@ -59,7 +61,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         return 0;
     }
 
-    class ItemInfoViewHolder extends RecyclerView.ViewHolder {
+    class ItemInfoViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private TakeOrderItemLayoutBinding mBinding;
 
         ItemInfoViewHolder(@NonNull TakeOrderItemLayoutBinding binding) {
@@ -75,19 +77,20 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     String itemName=mItemArrayList.get(getAdapterPosition()).getItemName();
-                    String itemCount=mBinding.spinnerCount.getSelectedItem().toString();
-                    OrderDetail orderDetail=new OrderDetail("",itemName+"-"+itemCount);
+                    int itemCount=Integer.valueOf(mBinding.spinnerCount.getSelectedItem().toString());
+                    String itemId=mItemArrayList.get(getAdapterPosition()).getItemId();
+                    OrderDetail orderDetail=new OrderDetail(itemId,itemName,itemCount);
                     if (isChecked)
                         mListener.onCheckBoxChecked(orderDetail, true);
                     else
                         mListener.onCheckBoxChecked(orderDetail, false);
                 }
             });
+            binding.getRoot().setOnLongClickListener(this);
         }
 
         void bindView(Item item) {
             mBinding.tvItem.setText(item.getItemName());
-            mBinding.checkBox.setChecked(item.getIsChecked() != 0);
             mBinding.spinnerCount.setAdapter(getSpinnerAdapter(item));
         }
 
@@ -97,6 +100,12 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                 countList.add(i, i + 1);
             }
             return new ArrayAdapter<>(mBinding.getRoot().getContext(), android.R.layout.simple_spinner_dropdown_item, countList);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mListener.onItemLongPress(mItemArrayList.get(getAdapterPosition()));
+            return true;
         }
     }
 }

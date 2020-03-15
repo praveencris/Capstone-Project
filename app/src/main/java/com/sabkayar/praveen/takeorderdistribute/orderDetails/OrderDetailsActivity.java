@@ -1,19 +1,18 @@
 package com.sabkayar.praveen.takeorderdistribute.orderDetails;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sabkayar.praveen.takeorderdistribute.R;
 import com.sabkayar.praveen.takeorderdistribute.database.AppDatabase;
 import com.sabkayar.praveen.takeorderdistribute.database.AppExecutors;
@@ -21,12 +20,9 @@ import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.UserName;
 import com.sabkayar.praveen.takeorderdistribute.databinding.ActivityOrderDetailsBinding;
-
 import com.sabkayar.praveen.takeorderdistribute.orderDetails.adapter.OrderDetailsAdapter;
 import com.sabkayar.praveen.takeorderdistribute.takeOrder.TakeOrderActivity;
 import com.sabkayar.praveen.takeorderdistribute.takeOrder.Utils;
-import com.sabkayar.praveen.takeorderdistribute.takeOrder.adapter.ItemInfoAdapter;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +32,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
     ActivityOrderDetailsBinding mBinding;
     private List<OrderDetail> mOrderDetails;
     private OrderDetailsAdapter mOrderDetailsAdapter;
+    private DatabaseReference mDatabaseReferenceItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
         mBinding.toolbar.inflateMenu(R.menu.menu_main);
         mBinding.tvLabel.setText(getString(R.string.number_of_orders_, 0));
 
+        mDatabaseReferenceItems= FirebaseDatabase.getInstance().getReference("items");
 
         mBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,16 +58,19 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
                     AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
                         @Override
                         public void run() {
-                            for(Item itemInfo: Utils.getDummyList()){
-                                Item item=new Item(itemInfo.getItemName(),itemInfo.getItemPrice(),itemInfo.getMaxItemAllowed(),itemInfo.getIsChecked());
-                                AppDatabase.getInstance(OrderDetailsActivity.this).takeOrderDao()
-                                        .insert(item);
+                            for(Item itemInfo: Utils.getDummyList()) {
+                                String id = mDatabaseReferenceItems.push().getKey();
+                                com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item item
+                                        = new com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item(id, itemInfo.getItemName(), String.valueOf(itemInfo.getItemPrice()), itemInfo.getMaxItemAllowed());
+                                mDatabaseReferenceItems.child(id).setValue(item);
+
+                                Item itemLocal = new Item(itemInfo.getItemName(), itemInfo.getItemPrice(), itemInfo.getMaxItemAllowed(), itemInfo.getIsChecked());
+                                AppDatabase.getInstance(OrderDetailsActivity.this).takeOrderDao().insert(itemLocal);
                             }
                         }
                     });
                 }else {
                     Toast.makeText(OrderDetailsActivity.this,"Sit silently",Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -109,16 +110,6 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
 
     }
 
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RC_TAKE_ORDER){
-           if(resultCode==RESULT_OK){
-
-               }
-           }
-        }
-    }*/
 
 
 
