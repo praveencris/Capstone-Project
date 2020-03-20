@@ -21,8 +21,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,9 +36,13 @@ import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.User;
 import com.sabkayar.praveen.takeorderdistribute.takeOrder.adapter.ItemInfoAdapter;
+import com.sabkayar.praveen.takeorderdistribute.takeOrder.model.ItemInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdapter.OnListItemListener, View.OnClickListener {
 
@@ -52,10 +54,16 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     private String mUserName;
     private List<OrderDetail> mOrderDetails;
 
+    private List<OrderDetail> mOrderDetailsForEditList;
+    private HashMap<String, ItemInfo> mStringItemInfoHashMap;
+
     DatabaseReference mDatabaseReferenceItems;
     DatabaseReference mDatabaseReferenceUsers;
+    DatabaseReference mDatabaseReferenceNames;
 
-    ValueEventListener mValueEventListener;
+    private ValueEventListener mValueEventListenerNames;
+    private ValueEventListener mValueEventListenerItems;
+    private ValueEventListener mValueEventListenerUsers;
 
     public static Intent newIntent(Context context, String userName) {
         Intent intent = new Intent(context, TakeOrderActivity.class);
@@ -70,6 +78,8 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
 
         mDatabaseReferenceItems = FirebaseDatabase.getInstance().getReference("items");
         mDatabaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users");
+        mDatabaseReferenceNames = FirebaseDatabase.getInstance().getReference("names");
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -99,11 +109,38 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
             case android.R.id.home:
                 if (!mOrderDetails.isEmpty()) {
                     String id = mDatabaseReferenceUsers.push().getKey();
-                    mDatabaseReferenceUsers.child(id).setValue(new User(id, mUserName));
+                    User user = new User(id, mUserName);
+                    mDatabaseReferenceUsers.child(id).child("user").setValue(user);
                     for (OrderDetail orderDetail : mOrderDetails) {
-                        mDatabaseReferenceUsers.child(id).child(orderDetail.getItemId()).setValue(orderDetail);
+                        mDatabaseReferenceUsers.child(id).child("order").child(orderDetail.getItemId()).setValue(orderDetail);
                     }
                 }
+
+
+                mValueEventListenerNames = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean isNameAvailable = false;
+                        for (DataSnapshot namesSnapshot : dataSnapshot.getChildren()) {
+                            String name = namesSnapshot.getValue(String.class);
+                            if (mUserName.equals(name)) {
+                                isNameAvailable = true;
+                                break;
+                            }
+                        }
+                        mDatabaseReferenceNames.removeEventListener(mValueEventListenerNames);
+                        if (!isNameAvailable) {
+                            String id = mDatabaseReferenceNames.push().getKey();
+                            mDatabaseReferenceNames.child(id).setValue(mUserName);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                };
+                mDatabaseReferenceNames.addValueEventListener(mValueEventListenerNames);
                 finish();
         }
         return super.onOptionsItemSelected(item);
@@ -155,33 +192,35 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
 
     private void updateItem(Item item) {
         final boolean[] isAllowedForUpdate = {false};
-        mValueEventListener = null;
-        mValueEventListener = mDatabaseReferenceUsers.addValueEventListener(new ValueEventListener() {
+        final boolean[] isItemAvailableInOrders = {false};
+        mValueEventListenerUsers = null;
+        mValueEventListenerUsers = mDatabaseReferenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                label:
                 for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
-                    if (userDataSnapshot.hasChildren()) {
-                        for (DataSnapshot itemDataSnapshot : userDataSnapshot.getChildren()) {
-                            if (itemDataSnapshot.hasChildren()) {
-                                OrderDetail newOrderDetail = itemDataSnapshot.getValue(OrderDetail.class);
-                                if (item.getItemId().equals(newOrderDetail.getItemId())) {
-                                    newOrderDetail.setItemName(item.getItemName());
-                                    if(item.getMaxItemAllowed()>=newOrderDetail.getItemCount()){
-                                        itemDataSnapshot.getRef().setValue(newOrderDetail);
-                                        isAllowedForUpdate[0]=true;
-                                    }else {
-                                        isAllowedForUpdate[0]=false;
-                                        Toast.makeText(TakeOrderActivity.this, "Max count allowed can not be less then item count. Update item failed!", Toast.LENGTH_LONG).show();
-                                    }
-                                    break;
-                                }
+                    DataSnapshot ordersPerUserSnapshot = userDataSnapshot.child("order");
+                    //DataSnapshot userSnapshot=userDataSnapshot.child("user");
+                    for (DataSnapshot order : ordersPerUserSnapshot.getChildren()) {
+                        OrderDetail newOrderDetail = order.getValue(OrderDetail.class);
+                        if (item.getItemId().equals(newOrderDetail.getItemId())) {
+                            isItemAvailableInOrders[0] = true;
+                            newOrderDetail.setItemName(item.getItemName());
+                            if (item.getMaxItemAllowed() >= newOrderDetail.getItemCount()) {
+                                order.getRef().setValue(newOrderDetail);
+                                isAllowedForUpdate[0] = true;
+                                break;
+                            } else {
+                                isAllowedForUpdate[0] = false;
+                                Toast.makeText(TakeOrderActivity.this, "Max count allowed can not be less then item count. Update item failed!", Toast.LENGTH_LONG).show();
+                                break label;
                             }
                         }
                     }
                 }
                 detachValueEventListener();
-                if(isAllowedForUpdate[0]){
-                    mDatabaseReferenceItems.child(item.getItemId()).setValue(item);
+                if (isAllowedForUpdate[0] || !isItemAvailableInOrders[0]) {
+                    addItem(item);
                 }
             }
 
@@ -194,13 +233,43 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     }
 
     private void detachValueEventListener() {
-        if (mValueEventListener != null) {
-            mDatabaseReferenceUsers.removeEventListener(mValueEventListener);
+        if (mValueEventListenerUsers != null) {
+            mDatabaseReferenceUsers.removeEventListener(mValueEventListenerUsers);
         }
     }
 
     private void addItem(Item item) {
-        mDatabaseReferenceItems.child(item.getItemId()).setValue(item);
+        final boolean[] isItemNameThere = new boolean[]{false};
+        mValueEventListenerItems = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot itemDataSnapshot : dataSnapshot.getChildren()) {
+                    Item newItem = itemDataSnapshot.getValue(Item.class);
+                    if (item.getItemName().equalsIgnoreCase(newItem.getItemName())) {
+                        isItemNameThere[0] = true;
+                        break;
+                    }
+                }
+                if (!isItemNameThere[0]) {
+                    mDatabaseReferenceItems.child(item.getItemId()).setValue(item);
+                } else {
+                    Toast.makeText(TakeOrderActivity.this, "Item with same name already available", Toast.LENGTH_SHORT).show();
+                }
+                detachItemsListener();
+            }
+
+            private void detachItemsListener() {
+                mDatabaseReferenceItems.removeEventListener(mValueEventListenerItems);
+                mValueEventListenerItems = null;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                detachItemsListener();
+            }
+        };
+        mDatabaseReferenceItems.addValueEventListener(mValueEventListenerItems);
+
     }
 
     @Override
@@ -217,6 +286,17 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
         showDeleteDialog(item);
     }
 
+    @Override
+    public void onItemCountChanged(OrderDetail orderFrom) {
+        for (int i = 0; i < mOrderDetails.size(); i++) {
+            if (mOrderDetails.get(i).getItemId().equals(orderFrom.getItemId())) {
+                mOrderDetails.remove(i);
+                mOrderDetails.add(i, orderFrom);
+                break;
+            }
+        }
+    }
+
     private void showDeleteDialog(Item item) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle("Do you want to delete item " + item.getItemName());
@@ -231,21 +311,21 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
                 final boolean[] isItemAvailableInOrders = {false};
-                mValueEventListener = null;
-                mValueEventListener = mDatabaseReferenceUsers.addValueEventListener(new ValueEventListener() {
+                mValueEventListenerUsers = null;
+                mValueEventListenerUsers = mDatabaseReferenceUsers.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         for (DataSnapshot userDataSnapshot : dataSnapshot.getChildren()) {
-                            if (userDataSnapshot.hasChildren()) {
-                                for (DataSnapshot itemDataSnapshot : userDataSnapshot.getChildren()) {
-                                    if (itemDataSnapshot.hasChildren()) {
-                                        Item newItem = itemDataSnapshot.getValue(Item.class);
-                                        if (item.getItemId().equals(newItem.getItemId())) {
-                                            itemDataSnapshot.getRef().setValue(item);
-                                            Toast.makeText(TakeOrderActivity.this, "Item " + item.getItemName() + " already present in one of the order. Deletion not allowed!", Toast.LENGTH_LONG).show();
-                                            isItemAvailableInOrders[0] = true;
-                                            break;
-                                        }
+                            DataSnapshot ordersPerUserSnapshot = userDataSnapshot.child("order");
+                            //  DataSnapshot userSnapshot=userDataSnapshot.child("user");
+                            for (DataSnapshot order : ordersPerUserSnapshot.getChildren()) {
+                                if (order.hasChildren()) {
+                                    OrderDetail orderDetail = order.getValue(OrderDetail.class);
+                                    if (item.getItemId().equals(orderDetail.getItemId())) {
+                                        Toast.makeText(TakeOrderActivity.this, "Item " + item.getItemName() + " already present in one of the order. Deletion not allowed!", Toast.LENGTH_LONG).show();
+                                        isItemAvailableInOrders[0] = true;
+                                        break;
                                     }
                                 }
                             }
@@ -321,12 +401,37 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
         mDatabaseReferenceItems.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Item> itemList = new ArrayList<>();
+                List<ItemInfo> itemInfoList = new ArrayList<>();
+                mStringItemInfoHashMap = new HashMap<>();
                 for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
                     Item item = itemSnapshot.getValue(Item.class);
-                    itemList.add(item);
+                    ItemInfo itemInfo = new
+                            ItemInfo(item.getItemId(), item.getItemName(),
+                            item.getItemPrice(), item.getMaxItemAllowed(), false, 0);
+                    itemInfoList.add(itemInfo);
+                    mStringItemInfoHashMap.put(itemInfo.getItemId(), itemInfo);
                 }
-                mItemInfoAdapter.setItemInfoArrayList(itemList);
+                if (mOrderDetailsForEditList != null) {
+                    for (OrderDetail orderDetail : mOrderDetailsForEditList) {
+                        if(mStringItemInfoHashMap.containsKey(orderDetail.getItemId())) {
+                            ItemInfo itemInfo = mStringItemInfoHashMap.get(orderDetail.getItemId());
+                            if (itemInfo != null) {
+                                itemInfo.setItemsSelected(orderDetail.getItemCount() - 1);
+                                itemInfo.setChecked(true);
+                                mStringItemInfoHashMap.put(orderDetail.getItemId(),itemInfo) ;
+                            }
+                        }
+                    }
+                    // Getting an iterator
+                    Iterator hmIterator = mStringItemInfoHashMap.entrySet().iterator();
+                    itemInfoList.clear();
+                    // Iterate through the hashmap
+                    while (hmIterator.hasNext()) {
+                        Map.Entry mapElement = (Map.Entry)hmIterator.next();
+                        itemInfoList.add((ItemInfo) mapElement.getValue());
+                    }
+                }
+                mItemInfoAdapter.setItemInfoArrayList(itemInfoList);
             }
 
             @Override
@@ -336,4 +441,6 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
         });
 
     }
+
+
 }

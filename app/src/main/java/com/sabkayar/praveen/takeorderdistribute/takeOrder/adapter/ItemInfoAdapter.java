@@ -3,6 +3,7 @@ package com.sabkayar.praveen.takeorderdistribute.takeOrder.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.SpinnerAdapter;
@@ -12,16 +13,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sabkayar.praveen.takeorderdistribute.R;
+import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
-import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
+import com.sabkayar.praveen.takeorderdistribute.takeOrder.model.ItemInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemInfoViewHolder> {
 
-    private List<Item> mItemArrayList = new ArrayList<>();
+    private List<ItemInfo> mItemInfoArrayList = new ArrayList<>();
 
     public interface OnListItemListener {
         void onEditClick(Item item);
@@ -29,6 +31,8 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         void onCheckBoxChecked(OrderDetail orderDetail,boolean isAdd);
 
         void onItemLongPress(Item item);
+
+        void onItemCountChanged(OrderDetail orderDetail);
     }
 
     private OnListItemListener mListener;
@@ -37,8 +41,8 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
         mListener = listener;
     }
 
-    public void setItemInfoArrayList(List<Item> itemInfoArrayList) {
-        mItemArrayList = itemInfoArrayList;
+    public void setItemInfoArrayList(List<ItemInfo> itemInfoArrayList) {
+        mItemInfoArrayList = itemInfoArrayList;
         notifyDataSetChanged();
     }
 
@@ -51,13 +55,13 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
 
     @Override
     public void onBindViewHolder(@NonNull ItemInfoViewHolder holder, int position) {
-        holder.bindView(mItemArrayList.get(position));
+        holder.bindView(mItemInfoArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (mItemArrayList != null)
-            return mItemArrayList.size();
+        if (mItemInfoArrayList != null)
+            return mItemInfoArrayList.size();
         return 0;
     }
 
@@ -70,15 +74,33 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             mBinding.imvEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onEditClick(mItemArrayList.get(getAdapterPosition()));
+                    ItemInfo itemInfo = mItemInfoArrayList.get(getAdapterPosition());
+                    Item item = new Item(itemInfo.getItemId(), itemInfo.getItemName(),
+                            itemInfo.getItemPrice(), itemInfo.getMaxItemAllowed());
+                    mListener.onEditClick(item);
+                }
+            });
+            mBinding.spinnerCount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String itemName=mItemInfoArrayList.get(getAdapterPosition()).getItemName();
+                    int itemCount=Integer.valueOf(mBinding.spinnerCount.getSelectedItem().toString());
+                    String itemId=mItemInfoArrayList.get(getAdapterPosition()).getItemId();
+                    OrderDetail orderDetail=new OrderDetail(itemId,itemName,itemCount);
+                    mListener.onItemCountChanged(orderDetail);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
             mBinding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    String itemName=mItemArrayList.get(getAdapterPosition()).getItemName();
+                    String itemName=mItemInfoArrayList.get(getAdapterPosition()).getItemName();
                     int itemCount=Integer.valueOf(mBinding.spinnerCount.getSelectedItem().toString());
-                    String itemId=mItemArrayList.get(getAdapterPosition()).getItemId();
+                    String itemId=mItemInfoArrayList.get(getAdapterPosition()).getItemId();
                     OrderDetail orderDetail=new OrderDetail(itemId,itemName,itemCount);
                     if (isChecked)
                         mListener.onCheckBoxChecked(orderDetail, true);
@@ -89,9 +111,13 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             binding.getRoot().setOnLongClickListener(this);
         }
 
-        void bindView(Item item) {
-            mBinding.tvItem.setText(item.getItemName());
+        void bindView(ItemInfo itemInfo) {
+            mBinding.tvItem.setText(itemInfo.getItemName());
+            Item item = new Item(itemInfo.getItemId(), itemInfo.getItemName(),
+                    itemInfo.getItemPrice(), itemInfo.getMaxItemAllowed());
             mBinding.spinnerCount.setAdapter(getSpinnerAdapter(item));
+            mBinding.checkBox.setChecked(itemInfo.isChecked());
+            mBinding.spinnerCount.setSelection(itemInfo.getItemsSelected());
         }
 
         private SpinnerAdapter getSpinnerAdapter(Item item) {
@@ -104,7 +130,10 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
 
         @Override
         public boolean onLongClick(View v) {
-            mListener.onItemLongPress(mItemArrayList.get(getAdapterPosition()));
+            ItemInfo itemInfo = mItemInfoArrayList.get(getAdapterPosition());
+            Item item = new Item(itemInfo.getItemId(), itemInfo.getItemName(),
+                    itemInfo.getItemPrice(), itemInfo.getMaxItemAllowed());
+            mListener.onItemLongPress(item);
             return true;
         }
     }

@@ -1,12 +1,10 @@
 package com.sabkayar.praveen.takeorderdistribute.orderDetails.adapter;
 
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
@@ -15,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sabkayar.praveen.takeorderdistribute.R;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
-import com.sabkayar.praveen.takeorderdistribute.database.entity.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.databinding.OrderItemLayoutBinding;
-import com.sabkayar.praveen.takeorderdistribute.databinding.TakeOrderItemLayoutBinding;
+import com.sabkayar.praveen.takeorderdistribute.orderDetails.model.OrderPerUser;
+import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.OrderDetailsViewHolder> {
 
-    private ArrayList<OrderDetail> mItemArrayList = new ArrayList<>();
+    private List<OrderPerUser> mItemArrayList = new ArrayList<>();
 
     public interface OnListItemListener {
-        void onItemClick(OrderDetail orderDetail);
+        void onItemClick(OrderPerUser orderPerUser);
     }
 
     private OnListItemListener mListener;
@@ -36,7 +34,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         mListener = listener;
     }
 
-    public void setItemInfoArrayList(ArrayList<OrderDetail> itemInfoArrayList) {
+    public void setItemInfoArrayList(List<OrderPerUser> itemInfoArrayList) {
         mItemArrayList = itemInfoArrayList;
         notifyDataSetChanged();
     }
@@ -60,17 +58,24 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         return 0;
     }
 
-    class OrderDetailsViewHolder extends RecyclerView.ViewHolder {
+    class OrderDetailsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private OrderItemLayoutBinding mBinding;
 
         OrderDetailsViewHolder(@NonNull OrderItemLayoutBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
+            mBinding.getRoot().setOnClickListener(this);
         }
 
-        void bindView(OrderDetail orderDetail) {
-            mBinding.tvName.setText(orderDetail.getUserName());
-            mBinding.tvOrderDescription.append(orderDetail.getItemDesc());
+        void bindView(OrderPerUser orderPerUser) {
+            mBinding.tvName.setText(orderPerUser.getUserName());
+            StringBuilder sb = new StringBuilder();
+            for (OrderDetail orderDetail : orderPerUser.getOrderDetails()) {
+                sb.append(orderDetail.getItemName() + "-" + orderDetail.getItemCount() + ",");
+            }
+            String orderDesc = sb.toString();
+            orderDesc = orderDesc.substring(0, orderDesc.lastIndexOf(","));
+            mBinding.tvOrderDescription.setText(orderDesc);
         }
 
         private SpinnerAdapter getSpinnerAdapter(Item item) {
@@ -79,6 +84,11 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
                 countList.add(i, i + 1);
             }
             return new ArrayAdapter<>(mBinding.getRoot().getContext(), android.R.layout.simple_spinner_dropdown_item, countList);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onItemClick(mItemArrayList.get(getAdapterPosition()));
         }
     }
 }
