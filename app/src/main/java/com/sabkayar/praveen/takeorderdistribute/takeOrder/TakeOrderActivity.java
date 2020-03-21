@@ -32,6 +32,7 @@ import com.sabkayar.praveen.takeorderdistribute.database.AppExecutors;
 import com.sabkayar.praveen.takeorderdistribute.database.entity.UserName;
 import com.sabkayar.praveen.takeorderdistribute.databinding.ActivityTakeOrderBinding;
 import com.sabkayar.praveen.takeorderdistribute.databinding.DialogAddItemBinding;
+import com.sabkayar.praveen.takeorderdistribute.orderDetails.model.OrderPerUser;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.User;
@@ -49,12 +50,15 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     public static final String EXTRA_EDITED_ITEMS_LIST_DETAILS = "extra_order_details" + TakeOrderActivity.class.getSimpleName();
     public static final String EXTRA_ORDER_DETAILS = "extra_order_details" + TakeOrderActivity.class.getSimpleName();
     private static final String EXTRA_USER_NAME = "extra_user_name" + TakeOrderActivity.class.getSimpleName();
+    private static final String EXTRA_ORDER_PER_USER = "extra_order_per_user" + TakeOrderActivity.class.getSimpleName();
     private ActivityTakeOrderBinding mBinding;
     private ItemInfoAdapter mItemInfoAdapter;
     private String mUserName;
-    private List<OrderDetail> mOrderDetails;
+
+    private HashMap<String, OrderDetail> mStringOrderDetailHashMap;
 
     private List<OrderDetail> mOrderDetailsForEditList;
+    private OrderPerUser mOrderPerUser;
     private HashMap<String, ItemInfo> mStringItemInfoHashMap;
 
     DatabaseReference mDatabaseReferenceItems;
@@ -65,9 +69,14 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     private ValueEventListener mValueEventListenerItems;
     private ValueEventListener mValueEventListenerUsers;
 
-    public static Intent newIntent(Context context, String userName) {
+    public static Intent newIntent(Context context, String userName, OrderPerUser orderPerUser) {
         Intent intent = new Intent(context, TakeOrderActivity.class);
-        intent.putExtra(EXTRA_USER_NAME, userName);
+        if (TextUtils.isEmpty(userName)) {
+            intent.putExtra(EXTRA_USER_NAME, orderPerUser.getUserName());
+            intent.putExtra(EXTRA_ORDER_PER_USER, orderPerUser);
+        } else {
+            intent.putExtra(EXTRA_USER_NAME, userName);
+        }
         return intent;
     }
 
@@ -79,13 +88,23 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
         mDatabaseReferenceItems = FirebaseDatabase.getInstance().getReference("items");
         mDatabaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users");
         mDatabaseReferenceNames = FirebaseDatabase.getInstance().getReference("names");
-
+        mStringOrderDetailHashMap = new HashMap<>();
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Take Order");
         }
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_ORDER_PER_USER)) {
+            mOrderPerUser = (OrderPerUser) intent.getSerializableExtra(EXTRA_ORDER_PER_USER);
+            mOrderDetailsForEditList = new ArrayList<>();
+            mOrderDetailsForEditList.addAll(mOrderPerUser.getOrderDetails());
+        } else {
+            mOrderDetailsForEditList = null;
+        }
+
         mUserName = getIntent().getStringExtra(EXTRA_USER_NAME);
         mBinding.tvName.setText(mUserName);
         AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
@@ -95,7 +114,7 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
                         .insert(new UserName(mUserName));
             }
         });
-        mOrderDetails = new ArrayList<>();
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mBinding.recyclerView.setLayoutManager(layoutManager);
         mItemInfoAdapter = new ItemInfoAdapter(this);
@@ -107,15 +126,32 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (!mOrderDetails.isEmpty()) {
-                    String id = mDatabaseReferenceUsers.push().getKey();
-                    User user = new User(id, mUserName);
-                    mDatabaseReferenceUsers.child(id).child("user").setValue(user);
-                    for (OrderDetail orderDetail : mOrderDetails) {
+                if (!mStringOrderDetailHashMap.isEmpty()) {
+                    String id;
+                    if (mOrderDetailsForEditList != null) {
+                        id = mOrderPerUser.getUserId();
+                    } else {
+                        id = mDatabaseReferenceUsers.push().getKey();
+                        User user = new User(id, mUserName);
+                        mDatabaseReferenceUsers.child(id).child("user").setValue(user);
+                    }
+
+                    // Getting an iterator
+                    Iterator hmIterator = mStringOrderDetailHashMap.entrySet().iterator();
+                    mDatabaseReferenceUsers.child(id).child("order").removeValue();
+                    // Iterate through the hashmap
+                    while (hmIterator.hasNext()) {
+                        Map.Entry mapElement = (Map.Entry) hmIterator.next();
+                        OrderDetail orderDetail = (OrderDetail) mapElement.getValue();
                         mDatabaseReferenceUsers.child(id).child("order").child(orderDetail.getItemId()).setValue(orderDetail);
                     }
-                }
 
+                } else {
+                    if (mOrderDetailsForEditList != null) {
+                        String id = mOrderPerUser.getUserId();
+                        mDatabaseReferenceUsers.child(id).removeValue();
+                    }
+                }
 
                 mValueEventListenerNames = new ValueEventListener() {
                     @Override
@@ -220,7 +256,7 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
                 }
                 detachValueEventListener();
                 if (isAllowedForUpdate[0] || !isItemAvailableInOrders[0]) {
-                    addItem(item);
+                    mDatabaseReferenceItems.child(item.getItemId()).setValue(item);
                 }
             }
 
@@ -275,9 +311,9 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     @Override
     public void onCheckBoxChecked(OrderDetail orderDetail, boolean isAdd) {
         if (isAdd) {
-            mOrderDetails.add(orderDetail);
+            mStringOrderDetailHashMap.put(orderDetail.getItemId(), orderDetail);
         } else {
-            mOrderDetails.remove(orderDetail);
+            mStringOrderDetailHashMap.remove(orderDetail.getItemId());
         }
     }
 
@@ -288,12 +324,8 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
 
     @Override
     public void onItemCountChanged(OrderDetail orderFrom) {
-        for (int i = 0; i < mOrderDetails.size(); i++) {
-            if (mOrderDetails.get(i).getItemId().equals(orderFrom.getItemId())) {
-                mOrderDetails.remove(i);
-                mOrderDetails.add(i, orderFrom);
-                break;
-            }
+        if (mStringOrderDetailHashMap.containsKey(orderFrom.getItemId())) {
+            mStringOrderDetailHashMap.put(orderFrom.getItemId(), orderFrom);
         }
     }
 
@@ -413,12 +445,12 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
                 }
                 if (mOrderDetailsForEditList != null) {
                     for (OrderDetail orderDetail : mOrderDetailsForEditList) {
-                        if(mStringItemInfoHashMap.containsKey(orderDetail.getItemId())) {
+                        if (mStringItemInfoHashMap.containsKey(orderDetail.getItemId())) {
                             ItemInfo itemInfo = mStringItemInfoHashMap.get(orderDetail.getItemId());
                             if (itemInfo != null) {
                                 itemInfo.setItemsSelected(orderDetail.getItemCount() - 1);
                                 itemInfo.setChecked(true);
-                                mStringItemInfoHashMap.put(orderDetail.getItemId(),itemInfo) ;
+                                mStringItemInfoHashMap.put(orderDetail.getItemId(), itemInfo);
                             }
                         }
                     }
@@ -427,7 +459,7 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
                     itemInfoList.clear();
                     // Iterate through the hashmap
                     while (hmIterator.hasNext()) {
-                        Map.Entry mapElement = (Map.Entry)hmIterator.next();
+                        Map.Entry mapElement = (Map.Entry) hmIterator.next();
                         itemInfoList.add((ItemInfo) mapElement.getValue());
                     }
                 }

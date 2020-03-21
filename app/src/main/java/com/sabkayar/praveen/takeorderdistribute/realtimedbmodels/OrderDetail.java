@@ -1,6 +1,8 @@
 package com.sabkayar.praveen.takeorderdistribute.realtimedbmodels;
 
-public class OrderDetail {
+import java.io.Serializable;
+
+public class OrderDetail implements Serializable {
     private String itemId;
     private String itemName;
     private int itemCount;

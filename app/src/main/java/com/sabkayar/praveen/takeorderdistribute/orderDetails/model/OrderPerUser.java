@@ -2,9 +2,10 @@ package com.sabkayar.praveen.takeorderdistribute.orderDetails.model;
 
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OrderPerUser {
+public class OrderPerUser implements Serializable {
     private String userId;
     private String userName;
     private List<OrderDetail> orderDetails;

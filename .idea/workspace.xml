@@ -13,8 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92913c99-c5ee-4154-9d93-df0245cd315e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/model/ItemInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -22,17 +20,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +35,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="ZY3229TWP3" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -62,46 +54,22 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="114" column="64" selection-start-line="114" selection-start-column="64" selection-end-line="114" selection-end-column="64" />
+            <state relative-caret-position="-640">
+              <caret line="258" column="83" selection-start-line="258" selection-start-column="83" selection-end-line="258" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7170#7188#0" expanded="true" />
-                <element signature="e#7758#7759#0" expanded="true" />
-                <element signature="e#7810#7811#0" expanded="true" />
-                <element signature="e#12297#12298#0" expanded="true" />
-                <element signature="e#12350#12351#0" expanded="true" />
+                <element signature="e#9442#9443#0" expanded="true" />
+                <element signature="e#9494#9495#0" expanded="true" />
+                <element signature="e#13171#13172#0" expanded="true" />
                 <element signature="e#13209#13210#0" expanded="true" />
-                <element signature="e#13946#13947#0" expanded="true" />
-                <element signature="e#13993#13994#0" expanded="true" />
-                <element signature="e#17254#17255#0" expanded="true" />
-                <element signature="e#17322#17323#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#535#536#0" expanded="true" />
-                <element signature="e#564#565#0" expanded="true" />
-                <element signature="e#608#609#0" expanded="true" />
-                <element signature="e#644#645#0" expanded="true" />
-                <element signature="e#679#680#0" expanded="true" />
-                <element signature="e#710#711#0" expanded="true" />
-                <element signature="e#758#759#0" expanded="true" />
-                <element signature="e#798#799#0" expanded="true" />
-                <element signature="e#848#849#0" expanded="true" />
-                <element signature="e#883#884#0" expanded="true" />
+                <element signature="e#15573#15574#0" expanded="true" />
+                <element signature="e#15620#15621#0" expanded="true" />
+                <element signature="e#18881#18882#0" expanded="true" />
+                <element signature="e#18949#18950#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
               <folding>
                 <element signature="e#422#423#0" expanded="true" />
                 <element signature="e#451#452#0" expanded="true" />
@@ -133,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1471">
-              <caret line="117" column="70" selection-start-line="117" selection-start-column="70" selection-end-line="117" selection-end-column="70" />
+            <state relative-caret-position="204">
+              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,35 +111,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/model/ItemInfo.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="2" column="21" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="114">
+              <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
               <folding>
-                <element signature="e#665#666#0" expanded="true" />
-                <element signature="e#694#695#0" expanded="true" />
-                <element signature="e#738#739#0" expanded="true" />
-                <element signature="e#774#775#0" expanded="true" />
-                <element signature="e#809#810#0" expanded="true" />
-                <element signature="e#840#841#0" expanded="true" />
-                <element signature="e#888#889#0" expanded="true" />
-                <element signature="e#928#929#0" expanded="true" />
-                <element signature="e#964#965#0" expanded="true" />
-                <element signature="e#996#997#0" expanded="true" />
-                <element signature="e#1046#1047#0" expanded="true" />
-                <element signature="e#1088#1089#0" expanded="true" />
-                <element signature="e#1126#1127#0" expanded="true" />
-                <element signature="e#1163#1164#0" expanded="true" />
-                <element signature="e#1220#1221#0" expanded="true" />
-                <element signature="e#1272#1273#0" expanded="true" />
-                <element signature="e#1306#1307#0" expanded="true" />
-                <element signature="e#1338#1339#0" expanded="true" />
-                <element signature="e#1385#1386#0" expanded="true" />
-                <element signature="e#1420#1421#0" expanded="true" />
-                <element signature="e#1457#1458#0" expanded="true" />
-                <element signature="e#1493#1494#0" expanded="true" />
-                <element signature="e#1548#1549#0" expanded="true" />
-                <element signature="e#1598#1599#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#535#536#0" expanded="true" />
+                <element signature="e#564#565#0" expanded="true" />
+                <element signature="e#608#609#0" expanded="true" />
+                <element signature="e#644#645#0" expanded="true" />
+                <element signature="e#679#680#0" expanded="true" />
+                <element signature="e#710#711#0" expanded="true" />
+                <element signature="e#758#759#0" expanded="true" />
+                <element signature="e#798#799#0" expanded="true" />
+                <element signature="e#848#849#0" expanded="true" />
+                <element signature="e#883#884#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -180,90 +135,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="48" column="69" lean-forward="true" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
+            <state relative-caret-position="93">
+              <caret line="190" column="57" selection-start-line="190" selection-start-column="53" selection-end-line="190" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2372#2412#0" expanded="true" />
-                <element signature="e#2775#4343#0" />
-                <element signature="e#7066#7199#1" />
-                <element signature="e#7968#7976#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="19" column="62" lean-forward="true" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
-              <folding>
-                <element signature="e#2223#2256#0" expanded="true" />
-                <element signature="e#2305#2340#0" expanded="true" />
-                <element signature="e#2390#2425#0" expanded="true" />
-                <element signature="e#2694#2714#0" expanded="true" />
-                <element signature="e#3131#3166#0" expanded="true" />
-                <element signature="e#3600#4351#0" />
-                <element signature="e#5225#6208#0" />
-                <element signature="e#5235#5262#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
-              <caret line="65" column="31" lean-forward="true" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-                <element signature="e#1255#1256#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/database/entity/Item.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-              <folding>
-                <element signature="e#1039#1040#0" expanded="true" />
-                <element signature="e#1082#1083#0" expanded="true" />
-                <element signature="e#1144#1145#0" expanded="true" />
-                <element signature="e#1189#1190#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/Item.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="6" selection-end-column="31" />
-              <folding>
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#534#535#0" expanded="true" />
-                <element signature="e#578#579#0" expanded="true" />
-                <element signature="e#614#615#0" expanded="true" />
-                <element signature="e#649#650#0" expanded="true" />
-                <element signature="e#680#681#0" expanded="true" />
-                <element signature="e#728#729#0" expanded="true" />
-                <element signature="e#768#769#0" expanded="true" />
-                <element signature="e#804#805#0" expanded="true" />
-                <element signature="e#836#837#0" expanded="true" />
-                <element signature="e#886#887#0" expanded="true" />
-                <element signature="e#928#929#0" expanded="true" />
-                <element signature="e#966#967#0" expanded="true" />
-                <element signature="e#1003#1004#0" expanded="true" />
-                <element signature="e#1060#1061#0" expanded="true" />
-                <element signature="e#1112#1113#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -284,10 +159,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mValueEventListener</find>
-      <find>break;</find>
-      <find>mDatabaseReferenceItems.child(</find>
-      <find>Toast.m</find>
       <find>mDatabaseReferenceItems.child(item.getItemId())</find>
       <find>addItem</find>
       <find>addItem(</find>
@@ -303,9 +174,7 @@
       <find>onBin</find>
       <find>bind</find>
       <find>bindV</find>
-      <find>mOrderDetails</find>
       <find>mPairsList</find>
-      <find>mOrderDetailsForEditList</find>
       <find>order</find>
       <find>mDatabaseReferenceUsers</find>
       <find>OrderDetail</find>
@@ -314,6 +183,12 @@
       <find>setItemInfoArrayList</find>
       <find>mOrderDetailsAdapter</find>
       <find>floatingActionButton</find>
+      <find>mStringItemInfoHashMap</find>
+      <find>mOrderPerUser</find>
+      <find>mOrderDetailsForEditList</find>
+      <find>mOrderDetails</find>
+      <find>onChe</find>
+      <find>mStringOrderDetailHashMap</find>
     </findStrings>
     <replaceStrings>
       <replace>spinner_count</replace>
@@ -343,7 +218,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/font/open_sans.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values-v11/preloaded_fonts.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_take_order.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/order_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_background.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_background_positive.xml" />
@@ -369,15 +243,16 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/take_order_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/Item.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/database/AppDatabase.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/model/ItemInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/order_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java" />
       </list>
     </option>
   </component>
@@ -414,6 +289,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -474,6 +351,17 @@
               <item name="sabkayar" type="462c0819:PsiDirectoryNode" />
               <item name="praveen" type="462c0819:PsiDirectoryNode" />
               <item name="takeorderdistribute" type="462c0819:PsiDirectoryNode" />
+              <item name="orderDetails" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Take Order &amp; Distribute" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="sabkayar" type="462c0819:PsiDirectoryNode" />
+              <item name="praveen" type="462c0819:PsiDirectoryNode" />
+              <item name="takeorderdistribute" type="462c0819:PsiDirectoryNode" />
               <item name="takeOrder" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -485,8 +373,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -612,19 +498,19 @@
       <window_info id="Build Variants" order="2" sideWeight="0.50402576" side_tool="true" weight="0.14913544" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Capture Tool" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49597424" visible="true" weight="0.038184438" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49597424" visible="true" weight="0.071325645" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Resources Explorer" order="7" weight="0.3299712" />
       <window_info id="Structure" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="0" weight="0.055393588" />
-      <window_info anchor="bottom" id="Run" order="1" visible="true" weight="0.19387755" />
+      <window_info anchor="bottom" id="Build" order="0" weight="0.44752187" />
+      <window_info anchor="bottom" id="Run" order="1" weight="0.19387755" />
       <window_info anchor="bottom" id="Android Profiler" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50072044" side_tool="true" weight="0.47667637" />
       <window_info anchor="bottom" id="TODO" order="4" />
-      <window_info anchor="bottom" id="Logcat" order="5" weight="0.25655976" />
+      <window_info anchor="bottom" id="Logcat" order="5" sideWeight="0.49927953" weight="0.47667637" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.28425655" />
-      <window_info anchor="bottom" id="Debug" order="8" weight="0.6297376" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47959185" />
+      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.49927953" weight="0.36880466" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32944608" />
       <window_info anchor="right" id="Assistant" order="0" weight="0.18011527" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
@@ -633,13 +519,51 @@
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Gradle" order="5" weight="0.3299712" />
       <window_info anchor="right" id="Fabric" order="6" weight="0.3299712" />
-      <window_info active="true" anchor="right" id="Preview" order="7" visible="true" weight="0.34510085" />
+      <window_info anchor="right" id="Preview" order="7" weight="0.3443804" />
     </layout>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java</url>
+          <line>312</line>
+          <properties />
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java</url>
+          <line>313</line>
+          <properties />
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java</url>
+          <line>314</line>
+          <properties />
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java</url>
+          <line>315</line>
+          <properties />
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java</url>
+          <line>317</line>
+          <properties />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Remote">
+        <watch expression="mStringOrderDetailHashMap" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/font/open_sans_extra_bold.ttf">
-      <provider selected="true" editor-type-id="fontseditor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/font/roboto.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/font/roboto_light.ttf">
       <provider selected="true" editor-type-id="fontseditor" />
@@ -877,39 +801,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/order_item_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e70ecf9c8274aad48c9350bc2d968dea/jetified-firebase-database-16.0.4/jars/classes.jar!/com/google/firebase/database/core/ValueEventRegistration.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#451#452#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#531#532#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#685#686#0" expanded="true" />
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-            <element signature="e#839#840#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -984,20 +879,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1471">
-          <caret line="117" column="70" selection-start-line="117" selection-start-column="70" selection-end-line="117" selection-end-column="70" />
+        <state relative-caret-position="82">
+          <caret line="44" column="121" selection-start-line="44" selection-start-column="121" selection-end-line="44" selection-end-column="121" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1219#1220#0" expanded="true" />
+            <element signature="e#1255#1256#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/order_item_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+          <folding>
+            <element signature="e#490#525#0" expanded="true" />
+            <element signature="e#551#586#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="60" column="52" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+          <folding>
+            <element signature="e#2223#2256#0" expanded="true" />
+            <element signature="e#2305#2340#0" expanded="true" />
+            <element signature="e#2390#2425#0" expanded="true" />
+            <element signature="e#2694#2714#0" expanded="true" />
+            <element signature="e#3213#3248#0" expanded="true" />
+            <element signature="e#3298#3333#0" expanded="true" />
+            <element signature="e#3384#3419#0" expanded="true" />
+            <element signature="e#3600#4351#0" />
+            <element signature="e#5225#6208#0" />
+            <element signature="e#5235#5262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/model/OrderPerUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        <state relative-caret-position="114">
+          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#535#536#0" expanded="true" />
@@ -1014,69 +943,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java">
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-29/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="114" column="64" selection-start-line="114" selection-start-column="64" selection-end-line="114" selection-end-column="64" />
+        <state relative-caret-position="27">
+          <caret line="5487" column="16" selection-start-line="5487" selection-start-column="16" selection-end-line="5487" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7170#7188#0" expanded="true" />
-            <element signature="e#7758#7759#0" expanded="true" />
-            <element signature="e#7810#7811#0" expanded="true" />
-            <element signature="e#12297#12298#0" expanded="true" />
-            <element signature="e#12350#12351#0" expanded="true" />
-            <element signature="e#13209#13210#0" expanded="true" />
-            <element signature="e#13946#13947#0" expanded="true" />
-            <element signature="e#13993#13994#0" expanded="true" />
-            <element signature="e#17254#17255#0" expanded="true" />
-            <element signature="e#17322#17323#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/adapter/OrderDetailsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="65" column="31" lean-forward="true" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1255#1256#0" expanded="true" />
+            <element signature="e#235826#235827#0" expanded="true" />
+            <element signature="e#235874#235875#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/orderDetails/OrderDetailsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="48" column="69" lean-forward="true" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
+        <state relative-caret-position="93">
+          <caret line="190" column="57" selection-start-line="190" selection-start-column="53" selection-end-line="190" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2372#2412#0" expanded="true" />
-            <element signature="e#2775#4343#0" />
-            <element signature="e#7066#7199#1" />
-            <element signature="e#7968#7976#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_order_details.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/realtimedbmodels/OrderDetail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="19" column="62" lean-forward="true" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+        <state relative-caret-position="54">
+          <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
           <folding>
-            <element signature="e#2223#2256#0" expanded="true" />
-            <element signature="e#2305#2340#0" expanded="true" />
-            <element signature="e#2390#2425#0" expanded="true" />
-            <element signature="e#2694#2714#0" expanded="true" />
-            <element signature="e#3131#3166#0" expanded="true" />
-            <element signature="e#3600#4351#0" />
-            <element signature="e#5225#6208#0" />
-            <element signature="e#5235#5262#0" expanded="true" />
+            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#645#646#0" expanded="true" />
+            <element signature="e#685#686#0" expanded="true" />
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#750#751#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
+            <element signature="e#839#840#0" expanded="true" />
           </folding>
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/adapter/ItemInfoAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sabkayar/praveen/takeorderdistribute/takeOrder/TakeOrderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-640">
+          <caret line="258" column="83" selection-start-line="258" selection-start-column="83" selection-end-line="258" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9442#9443#0" expanded="true" />
+            <element signature="e#9494#9495#0" expanded="true" />
+            <element signature="e#13171#13172#0" expanded="true" />
+            <element signature="e#13209#13210#0" expanded="true" />
+            <element signature="e#15573#15574#0" expanded="true" />
+            <element signature="e#15620#15621#0" expanded="true" />
+            <element signature="e#18881#18882#0" expanded="true" />
+            <element signature="e#18949#18950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

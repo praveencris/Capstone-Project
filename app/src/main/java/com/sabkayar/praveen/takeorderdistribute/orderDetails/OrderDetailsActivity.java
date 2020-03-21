@@ -62,7 +62,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
                 String userName = mBinding.autoCompleteTvUserName.getText().toString().trim();
                 if (!TextUtils.isEmpty(userName)) {
                     if (!ifNamesAvailableInUsersListGetID(userName).first) {
-                        startActivityForResult(TakeOrderActivity.newIntent(OrderDetailsActivity.this, mBinding.autoCompleteTvUserName.getText().toString()), RC_TAKE_ORDER);
+                        startActivityForResult(TakeOrderActivity.newIntent(OrderDetailsActivity.this, mBinding.autoCompleteTvUserName.getText().toString(),null), RC_TAKE_ORDER);
                     } else {
                         Toast.makeText(OrderDetailsActivity.this, "Order with same name already available,Please edit.", Toast.LENGTH_SHORT).show();
                     }
@@ -188,6 +188,6 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
 
     @Override
     public void onItemClick(OrderPerUser orderPerUser) {
-
+      startActivity(TakeOrderActivity.newIntent(this,null,orderPerUser));
     }
 }
