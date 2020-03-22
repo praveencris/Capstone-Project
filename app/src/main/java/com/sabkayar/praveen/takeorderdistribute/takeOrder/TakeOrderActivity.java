@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,13 +62,18 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
     private OrderPerUser mOrderPerUser;
     private HashMap<String, ItemInfo> mStringItemInfoHashMap;
 
-    DatabaseReference mDatabaseReferenceItems;
-    DatabaseReference mDatabaseReferenceUsers;
-    DatabaseReference mDatabaseReferenceNames;
+    private DatabaseReference mDatabaseReferenceItems;
+    private DatabaseReference mDatabaseReferenceUsers;
+    private DatabaseReference mDatabaseReferenceNames;
 
     private ValueEventListener mValueEventListenerNames;
     private ValueEventListener mValueEventListenerItems;
     private ValueEventListener mValueEventListenerUsers;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mFirebaseAuth;
+
+
 
     public static Intent newIntent(Context context, String userName, OrderPerUser orderPerUser) {
         Intent intent = new Intent(context, TakeOrderActivity.class);
@@ -85,9 +91,13 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_take_order);
 
-        mDatabaseReferenceItems = FirebaseDatabase.getInstance().getReference("items");
-        mDatabaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users");
-        mDatabaseReferenceNames = FirebaseDatabase.getInstance().getReference("names");
+        mFirebaseDatabase=FirebaseDatabase.getInstance();
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        DatabaseReference singedUserReference=mFirebaseDatabase.getReference(mFirebaseAuth.getUid());
+
+        mDatabaseReferenceItems = singedUserReference.child("items");
+        mDatabaseReferenceUsers = singedUserReference.child("users");
+        mDatabaseReferenceNames = singedUserReference.child("names");
         mStringOrderDetailHashMap = new HashMap<>();
 
         ActionBar actionBar = getSupportActionBar();
@@ -471,7 +481,6 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
 
             }
         });
-
     }
 
 

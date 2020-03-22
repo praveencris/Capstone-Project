@@ -13,4 +13,10 @@
         android:orderInCategory="200"
         android:title="@string/action_summary"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_description_white"
+        android:orderInCategory="300"
+        android:title="@string/action_logout"
+        app:showAsAction="never" />
 </menu>

@@ -2,6 +2,7 @@
     <string name="app_name">Take Order &amp; Distribute</string>
     <string name="action_share">Share</string>
     <string name="action_summary">Summary</string>
+    <string name="action_logout">Log Out</string>
     <string name="number_of_orders_">Number of Orders : %d</string>
     <string name="enter_name">Enter Name</string>
     <string name="add_item">ADD ITEM</string>
@@ -11,4 +12,5 @@
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
     <string name="edit_item">EDIT ITEM</string>
+    <string name="total_amount">Total Amount</string>
 </resources>
