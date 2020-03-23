@@ -108,7 +108,7 @@ public class TakeOrderActivity extends AppCompatActivity implements ItemInfoAdap
 
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ORDER_PER_USER)) {
-            mOrderPerUser = (OrderPerUser) intent.getSerializableExtra(EXTRA_ORDER_PER_USER);
+            mOrderPerUser = intent.getParcelableExtra(EXTRA_ORDER_PER_USER);
             mOrderDetailsForEditList = new ArrayList<>();
             mOrderDetailsForEditList.addAll(mOrderPerUser.getOrderDetails());
         } else {

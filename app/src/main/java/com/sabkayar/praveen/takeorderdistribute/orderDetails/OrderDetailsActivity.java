@@ -27,14 +27,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sabkayar.praveen.takeorderdistribute.R;
-import com.sabkayar.praveen.takeorderdistribute.database.entity.Item;
+
 import com.sabkayar.praveen.takeorderdistribute.databinding.ActivityOrderDetailsBinding;
 import com.sabkayar.praveen.takeorderdistribute.orderDetails.adapter.OrderDetailsAdapter;
 import com.sabkayar.praveen.takeorderdistribute.orderDetails.model.OrderPerUser;
+import com.sabkayar.praveen.takeorderdistribute.ordersummary.OrderSummaryActivity;
+import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.Item;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.OrderDetail;
 import com.sabkayar.praveen.takeorderdistribute.realtimedbmodels.User;
 import com.sabkayar.praveen.takeorderdistribute.takeOrder.TakeOrderActivity;
 import com.sabkayar.praveen.takeorderdistribute.takeOrder.Utils;
+import com.sabkayar.praveen.takeorderdistribute.widget.OrderSummaryWidget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -119,6 +122,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
                 }
             }
         };
+
+
+        // this will send the broadcast to update the appwidget
+        OrderSummaryWidget.sendRefreshBroadcast(this);
     }
 
 
@@ -294,6 +301,8 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderDeta
             case R.id.action_logout:
                 AuthUI.getInstance().signOut(this);
                 return true;
+            case R.id.action_summary:
+                startActivity(OrderSummaryActivity.newIntent(this));
             default:
                 return false;
         }
